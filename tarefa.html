@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ganhei Show - Validando Link</title>
+    
+    <!-- ANÚNCIO ADSTERRA: POPUNDER (Abre ao interagir com a página) -->
+    <script src="https://pl30190901.effectivecpmnetwork.com/bf/4a/3e/bf4a3efc66ff05b548737f38163a849d.js"></script>
+
+    <!-- ANÚNCIO ADSTERRA: SOCIAL BAR (Notificações flutuantes no celular) -->
+    <script src="https://pl30190905.effectivecpmnetwork.com/82/a6/58/82a658371379ccb3976fa8abcc7eb1c2.js"></script>
+
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --danger: #ef4444;
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+        }
+
+        /* ÁREA DE ANÚNCIO SUPERIOR */
+        .ad-wrapper-top {
+            width: 100%;
+            max-width: 468px;
+            min-height: 60px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* CAIXA CENTRAL DO CRONÔMETRO */
+        .task-container {
+            width: 100%;
+            max-width: 420px;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 25px 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .task-header h2 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .task-header h2 span { color: var(--accent); }
+        .task-header p { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+
+        /* CAIXA DO CONTADOR */
+        .timer-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .timer-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+        .timer-text { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;}
+
+        /* BOTÃO DE VALIDAÇÃO (ESTILO ENCURTADOR) */
+        .btn-action {
+            width: 100%;
+            background: #475569;
+            color: rgba(255, 255, 255, 0.4);
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: not-allowed;
+            transition: all 0.3s ease;
+        }
+        .btn-action.ready {
+            background: var(--success);
+            color: #0f172a;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        /* ÁREAS DE CONTEÚDO / TEXTOS FALSOS PARA FAZER O USUÁRIO ROLAR A TELA (AUMENTA CLIQUES NO POPUNDER) */
+        .fake-content {
+            margin-top: 25px;
+            text-align: left;
+            background: rgba(15, 23, 42, 0.3);
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .fake-content h3 { color: var(--text-main); margin-bottom: 6px; font-size: 14px; }
+
+        /* ÁREA DE ANÚNCIO INFERIOR */
+        .ad-wrapper-bottom {
+            width: 100%;
+            max-width: 468px;
+            min-height: 60px;
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BLOCO DE ANÚNCIO SUPERIOR ADSTERRA (468x60) -->
+    <div class="ad-wrapper-top">
+        <script>
+            try {
+                atOptions = {
+                    'key' : '5b58d460411b2d45424a73b99bcb9159',
+                    'format' : 'iframe',
+                    'height' : 60,
+                    'width' : 468,
+                    'params' : {}
+                };
+                document.write('<scr' + 'ipt type="text/javascript" src="https://www.highperformanceformat.com/5b58d460411b2d45424a73b99bcb9159/invoke.js"></scr' + 'ipt>');
+            } catch(e) {}
+        </script>
+    </div>
+
+    <!-- PAINEL CENTRAL DE FLUXO -->
+    <div class="task-container">
+        <div class="task-header">
+            <h2>Ganhei<span>Show</span> Links</h2>
+            <p>Role a página para carregar as publicidades e liberar seu saldo.</p>
+        </div>
+
+        <div class="timer-box">
+            <div class="timer-number" id="countdown-num">15</div>
+            <div class="timer-text" id="countdown-status">Verificando anúncios de patrocinadores...</div>
+        </div>
+
+        <!-- BOTÃO REAL DO ENCURTADOR -->
+        <button id="claim-btn" class="btn-action" onclick="claimReward()" disabled>
+            Aguarde o cronômetro zerar...
+        </button>
+
+        <!-- TEXTOS FALSOS: EXTREMAMENTE ESSENCIAIS PARA ENCURTADOR -->
+        <!-- Fazem o usuário interagir e clicar na tela, ativando com sucesso o Popunder lucrativo -->
+        <div class="fake-content">
+            <h3>🔒 Instruções do Link Seguro:</h3>
+            <p>Para prosseguir com segurança até a validação do token financeiro, clique em qualquer anúncio ou aguarde os scripts gerarem a chave criptografada interna do seu aparelho.</p>
+        </div>
+    </div>
+
+    <!-- BLOCO DE ANÚNCIO INFERIOR ADSTERRA (468x60) -->
+    <div class="ad-wrapper-bottom">
+        <script>
+            try {
+                atOptions = {
+                    'key' : '5b58d460411b2d45424a73b99bcb9159',
+                    'format' : 'iframe',
+                    'height' : 60,
+                    'width' : 468,
+                    'params' : {}
+                };
+                document.write('<scr' + 'ipt type="text/javascript" src="https://www.highperformanceformat.com/5b58d460411b2d45424a73b99bcb9159/invoke.js"></scr' + 'ipt>');
+            } catch(e) {}
+        </script>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6URoPssZemFyTDU_0u1bAHyhimk4f2d0",
+            authDomain: "ganheishow.firebaseapp.com",
+            databaseURL: "https://ganheishow-default-rtdb.firebaseio.com",
+            projectId: "ganheishow",
+            storageBucket: "ganheishow.firebasestorage.app",
+            messagingSenderId: "458543082047",
+            appId: "1:458543082047:web:d4c7fd8f91001315dee68a",
+            measurementId: "G-ZQ5CRQ05YR"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+
+        let userUid = null;
+        let isTimeFinished = false;
+        let timeLeft = 15;
+
+        // Verifica se o usuário está logado de verdade antes de iniciar
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                userUid = user.uid;
+                startCountdown();
+            } else {
+                // Se não estiver logado, joga de volta para a tela inicial
+                window.location.href = 'index.html';
+            }
+        });
+
+        // INICIA CRONÔMETRO
+        function startCountdown() {
+            const counterElement = document.getElementById('countdown-num');
+            const statusElement = document.getElementById('countdown-status');
+            const mainBtn = document.getElementById('claim-btn');
+
+            const timer = setInterval(() => {
+                timeLeft--;
+                counterElement.innerText = timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    isTimeFinished = true;
+                    
+                    counterElement.innerText = "✓";
+                    counterElement.style.color = "var(--success)";
+                    statusElement.innerText = "Link de recompensa liberado!";
+                    
+                    mainBtn.disabled = false;
+                    mainBtn.className = "btn-action ready";
+                    mainBtn.innerText = "🎁 VALIDAR SALDO AGORA";
+                }
+            }, 1000);
+        }
+
+        // SALVA RECOMPENSA DE FORMA SEGURA NO BANCO DE DADOS
+        window.claimReward = async function() {
+            if (!userUid || !isTimeFinished) return;
+
+            const mainBtn = document.getElementById('claim-btn');
+            mainBtn.disabled = true;
+            mainBtn.innerText = "Processando transação segura...";
+
+            try {
+                const balanceRef = ref(database, `users/${userUid}/balance`);
+                const snapshot = await get(balanceRef);
+                const currentBalance = snapshot.val() || 0.000;
+
+                // Valor pago por clique no encurtador: R$ 0.050 por tarefa
+                const rewardValue = 0.050;
+                await set(balanceRef, currentBalance + rewardValue);
+
+                alert("Sucesso! R$ 0.050 adicionados ao seu saldo.");
+                
+                // Manda de volta para o index onde ele vê o novo saldo atualizado!
+                window.location.href = 'index.html';
+
+            } catch (error) {
+                alert("Erro ao validar tarefa. Tente novamente.");
+                mainBtn.disabled = false;
+                mainBtn.innerText = "🎁 VALIDAR SALDO AGORA";
+            }
+        }
+    </script>
+</body>
+</html>
