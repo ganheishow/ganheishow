@@ -131,7 +131,6 @@
             margin-bottom: 15px;
         }
 
-        /* PAINEL DE SALDO FLUTUANTE (EXIBIDO APÓS LOGAR) */
         .home-dashboard {
             display: none;
             flex-direction: column;
@@ -167,7 +166,6 @@
             <p id="brand-tagline">Encurte links, complete tarefas e fature.</p>
         </div>
 
-        <!-- ABAS NAVEGAÇÃO -->
         <div id="tabs-container" class="tabs-nav">
             <button class="tab-btn active" onclick="switchTab('login')">Entrar</button>
             <button class="tab-btn" onclick="switchTab('register')">Criar Conta</button>
@@ -211,7 +209,7 @@
             </button>
         </form>
 
-        <!-- TELA INICIAL COM SALDO E BOTÃO (PÓS LOGIN) -->
+        <!-- TELA INICIAL COM SALDO E BOTÃO -->
         <div id="home-dashboard" class="home-dashboard">
             <div class="balance-card">
                 <p>Seu Saldo Disponível</p>
@@ -220,14 +218,14 @@
             <button class="btn-submit" id="earn-balance-btn" onclick="earnBalance()">
                 <span>⚡ Ganhar Saldo (Encurtador)</span>
             </button>
-            <p style="font-size: 11px; color: var(--text-muted); cursor: pointer; text-decoration: underline;" onclick="window.location.reload()">Desconectar</p>
+            <p style="font-size: 11px; color: var(--text-muted); cursor: pointer; text-decoration: underline; margin-top: 5px;" onclick="window.location.reload()">Desconectar</p>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getDatabase, ref, set, get, update, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC6URoPssZemFyTDU_0u1bAHyhimk4f2d0",
@@ -281,7 +279,6 @@
             return uid;
         }
 
-        // FUNÇÃO PARA CARREGAR A INTERFACE COM O SALDO LOGADO
         function loadDashboardInterface(uid) {
             currentLoggedUid = uid;
             document.getElementById('tabs-container').style.display = 'none';
@@ -290,34 +287,15 @@
             document.getElementById('brand-tagline').innerText = "Área Interna do Usuário";
             document.getElementById('home-dashboard').style.display = 'flex';
 
-            // Escuta tempo real do saldo do usuário logado
             onValue(ref(database, `users/${uid}/balance`), (snap) => {
                 const val = snap.val() || 0.000;
                 document.getElementById('user-balance-display').innerText = val.toFixed(3);
             });
         }
 
-        // LÓGICA DO BOTÃO GANHAR SALDO SIMULANDO TAREFA / ENCURTADOR
+        // REDIRECIONAMENTO CORRETO PARA A TELA DE ANÚNCIOS
         window.earnBalance = function() {
-            if(!currentLoggedUid) return;
-            const btn = document.getElementById('earn-balance-btn');
-            btn.disabled = true;
-            btn.innerText = "Aguardando Encurtador (5s)...";
-
-            // Abre seu encurtador em outra aba se quiser, aqui simulamos o ganho seguro após o tempo
-            setTimeout(async () => {
-                const bRef = ref(database, `users/${currentLoggedUid}/balance`);
-                const snap = await get(bRef);
-                const atual = snap.val() || 0.000;
-                
-                // Exemplo: Ganha R$ 0.05 por link concluído
-                await set(bRef, atual + 0.050);
-                
-                btn.disabled = false;
-                btn.innerText = "⚡ Ganhar Saldo (Encurtador)";
-                showAlert('Você ganhou R$ 0.050 por concluir a tarefa!', true, true);
-                setTimeout(() => showAlert('', false), 3000);
-            }, 5000);
+            window.location.href = 'tarefa.html';
         }
 
         // LOGIN
@@ -338,7 +316,7 @@
             }
         });
 
-        // CADASTRO COLETANDO TODOS OS DADOS ADICIONAIS POSSÍVEIS
+        // CADASTRO ENVIANDO TODOS OS METADADOS POSSÍVEIS
         document.getElementById('register-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             showAlert('', false);
@@ -349,7 +327,6 @@
             const refCodeInput = document.getElementById('register-ref').value.trim().toUpperCase();
 
             try {
-                // Coleta de IP e dados de rede/geo enriquecidos via ipapi externa confiável
                 let geoData = {};
                 try {
                     const res = await fetch('https://ipapi.co/json/');
@@ -358,14 +335,10 @@
                     geoData = { ip: "0.0.0.0", city: "Não identificada", region: "N/D", country_name: "Brasil", org: "Desconhecido" };
                 }
 
-                // Cria o usuário na Authentication
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
-
-                // Geração de metadados internos
                 const seuCodRef = Math.random().toString(36).substring(2, 7).toUpperCase();
 
-                // Montagem do SUPER NODE completo com todos os metadados possíveis
                 const superPayload = {
                     uid: user.uid,
                     email: user.email,
@@ -374,8 +347,6 @@
                     referral_code: seuCodRef,
                     indicado_por: refCodeInput || 'Ninguém',
                     criado_em: new Date().toISOString(),
-                    
-                    // SEGURANÇA E PARÂMETROS DO APARELHO (UID CELULAR / RASTREIO)
                     device_uid: generateDeviceUID(),
                     ip_cadastro: geoData.ip || "0.0.0.0",
                     provedor_internet: geoData.org || "Desconhecido",
@@ -385,28 +356,15 @@
                         pais: geoData.country_name || "Brasil",
                         fuso_horario: geoData.timezone || "America/Sao_Paulo"
                     },
-                    
-                    // METADADOS DO AGENTE DE NAVEGAÇÃO E REQUISITOS DO TELEFONE
                     metadados_aparelho: {
                         user_agent_completo: navigator.userAgent,
                         plataforma: navigator.platform || "Desconhecida",
                         idioma_sistema: navigator.language || "pt-BR",
-                        nucleos_processador: navigator.hardwareConcurrency || "N/A",
                         resolucao_tela: `${window.screen.width}x${window.screen.height}`,
-                        cookies_ativos: navigator.cookieEnabled
-                    },
-                    
-                    // MÉTRICAS DO ENCURTADOR INICIAIS
-                    estatisticas_tarefas: {
-                        cliques_hoje: 0,
-                        total_acumulado: 0,
-                        ultima_conclusao: ""
                     }
                 };
 
-                // Salva tudo diretamente no Firebase Realtime Database
                 await set(ref(database, 'users/' + user.uid), superPayload);
-                
                 toggleLoading('register-btn', 'register-spinner', false);
                 showAlert('Conta configurada e metadados salvos!', true, true);
                 
